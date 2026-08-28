@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const adminId = "re7s1uzg";
     const stationID = 0;
 const initialsElement = document.getElementById("initials");
-const companyName = "ELDONET";
+const companyName = "BINARYISP";
 const getInitials = (name) => {
     if (!name) return "";
     return name.split(" ").map((n) => n[0]).join("");
