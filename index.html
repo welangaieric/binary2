@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>ELDONET | Premium WiFi</title>
+    <link rel="stylesheet" href="main.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon.ico">
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="bg-wave"></div>
+        <div class="bg-wave"></div>
+        <div class="bg-wave"></div>
+        <div class="bg-wave"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <h1 id="initials"></h1>
+                </div>
+                <span class="logo-text">ELDONET</span>
+            </div>
+            <button onclick="window.location.href='#selfcare'" class="location-btn">
+                <div class="location">
+                    <h4>Self Care</h4>
+                </div>
+            </button>
+        </header>
+
+        $(if chap-id)
+        <form name="sendin" action="$(link-login-only)" method="post">
+            <input type="hidden" name="username"/>
+            <input type="hidden" name="password"/>
+            <input type="hidden" name="dst" value="$(link-orig)"/>
+            <input type="hidden" name="popup" value="true"/>
+        </form>
+        <script src="./md5.js"></script>
+        <script>
+            function doLogin() {
+                document.sendin.username.value = document.login.username.value.toUpperCase().split(' ').join('');
+                document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+                document.sendin.submit();
+                return false;
+            }
+        </script>
+        $(endif)
+
+        <!-- Login Page -->
+        <div id="login-page" class="page active">
+            <div class="two-column-layout">
+                <!-- Left Column: How to purchase & Voucher Login -->
+                <div class="left-column">
+                  <div class="neu-card">
+                        <h2 class="section-title">How to purchase</h2>
+                        <ul class="purchase-list">
+                            <li>Click on select on the package you want.</li>
+                            <li>Enter your safaricom M-pesa number</li>
+                            <li>Click on buy</li>
+                            <li>Enter your M-pesa pin in the prompt</li>
+                            <li>Wait for a few seconds to be connected</li>
+                            <li>contact customer care <strong>0712205979</strong></li>
+                        </ul>
+                    </div> 
+
+                    <div class="neu-card">
+                        <p class="section-description">
+                            Enter your voucher code to access our internet.
+                        </p>
+                        <form name="login" id="login" class="voucher-form" method="post" $(if chap-id) onSubmit="return doLogin()"$(endif)>
+                            <input type="hidden" name="dst" value="$(link-orig)"/>
+                            <input type="hidden" name="popup" value="true"/>
+                            <div class="welcome-message">
+                                <p class="welcome-text">
+                                    $(if error == "")Karibu <strong>ELDONET!</strong> Log in and vibe online. 
+                                    $(if trial == 'yes')<br/>Free trial available, <a class="trial-link" href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)">click here</a>.$(endif)
+                                    $(endif)
+                                    $(if error)<span class="error-message">$(error)</span>$(endif)
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="txt-code" style="text-transform: uppercase" class="input-field" name="username" value="$(username)" placeholder="Enter Voucher Code" required/>
+                            </div>
+                            <input type="password" name="password" hidden value="konnekt" />
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <span>Connect Now</span>
+                            </button>
+                        </form>
+                        <p class="terms-text">
+                            By connecting, you agree to our <a href="#terms" onclick="showTermsPage(); return false;">Terms of Service</a> and <a href="#terms" onclick="showTermsPage(); return false;">Privacy Policy</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Column: Packages Section -->
+                <div class="right-column">
+                    <div class="packages-header">
+                        <h2 class="section-title">Choose Your Package</h2>
+                        <p class="section-description">
+                            Select the internet package that best suits your needs.
+                        </p>
+                    </div>
+                    <div class="package-grid" id="packageGrid">
+                        <!-- Package cards will be inserted here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <div class="faq-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <h3>Frequently Asked Questions</h3>
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>How do I get the code?</span>
+                            <div class="accordion-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>To get a code, scroll through our packages and click on select. Enter your phone number, you will be prompted to enter your mpesa pin. After this, you will be connected automatically.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Where can I get my code if I already purchased it?</span>
+                            <div class="accordion-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Voucher codes are normally sent to you via sms. If you didn't get one after your purchase, click on self care on top of the page to access it.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>How many devices can I connect?</span>
+                            <div class="accordion-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>The number of devices you can connect is only one.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Is the WiFi secure?</span>
+                            <div class="accordion-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>No, this is an open and public WiFi. You are advised to safeguard your personal information while connected to it.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>My connection is slow. What can I do?</span>
+                            <div class="accordion-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="accordion-content">
+                            <p>If you're experiencing slow speeds, try moving closer to an access point, restart your device. Peak usage times (evening) may affect performance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Self Care Page -->
+        <div id="selfcare-page" class="page">
+            <div class="neu-card">
+                <div class="flex-between">
+                    <h2 class="section-title">Self Care Portal</h2>
+                    <button onclick="window.location.href='#'" class="btn-sm">← Back to Home</button>
+                </div>
+                <p class="section-description">
+                    Enter your phone number to view your active vouchers and manage your account.
+                </p>
+
+                <form id="selfcare-phone-form" class="phone-form" onsubmit="event.preventDefault(); fetchVouchers();">
+                    <p id="selfcare-errorText" class="error-text"></p>
+                    <div class="form-group">
+                        <input type="tel" id="selfcare-phone-number" class="input-field" placeholder="Enter Phone Number (e.g., 07XX XXX XXX)" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <span>View My Vouchers</span>
+                    </button>
+                </form>
+
+                <div id="selfcare-vouchers-container" class="vouchers-container"></div>
+            </div>
+        </div>
+
+        <!-- Terms Page -->
+        <div id="terms-page" class="page">
+            <div class="neu-card">
+                <div class="flex-between">
+                    <h2 class="section-title">📄 Terms & Conditions</h2>
+                    <button onclick="window.location.href='#'" class="btn-sm">← Back to Home</button>
+                </div>
+                <p class="terms-date">Effective Date: April 14, 2025</p>
+                <div class="terms-content">
+                    <p>By using ELDONET's hotspot internet, you agree to the following terms:</p>
+                    <h4>1. Hotspot Service</h4>
+                    <p>ELDONET offers prepaid internet via voucher codes. Access is limited to the data and duration purchased.</p>
+                    <h4>2. Usage Rules</h4>
+                    <ul>
+                        <li>No illegal activity is allowed (e.g., spamming, hacking, piracy).</li>
+                        <li>One voucher = one device at a time (unless otherwise stated).</li>
+                    </ul>
+                    <h4>3. Payments</h4>
+                    <ul>
+                        <li>All hotspot payments are prepaid.</li>
+                        <li>No refunds will be issued once a code is activated.</li>
+                    </ul>
+                    <h4>4. Privacy</h4>
+                    <p>We collect basic details for service provision and performance improvement.</p>
+                    <h4>5. Contact & Support</h4>
+                    <p>For issues or feedback, contact us: 📞 +254712205979</p>
+                </div>
+                <div class="modal-actions">
+                    <button onclick="window.location.href='#'" class="btn btn-primary">I Accept</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Purchase Modal -->
+        <div id="purchase-modal" class="modal">
+            <div class="modal-content">
+                <h3 class="modal-title">ELDONET</h3>
+                <p id="modal-message" class="modal-message"></p>
+                <form id="Buy-form" class="voucher-form">
+                    <div class="form-group">
+                        <input type="number" id="phoneNumber" name="phone" class="input-field" placeholder="Enter phone 07XXXXXXXX" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Buy Plan</button>
+                </form>
+                <div class="modal-actions">
+                    <button id="modal-close" class="btn modal-btn">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-grid">
+                <div>
+                    <h4 class="footer-title">Help & Support</h4>
+                    <ul class="footer-list">
+                        <li><a href="tel:+254712205979" class="footer-link">Call +254712205979</a></li>
+                        <li><a href="sms:+254712205979" class="footer-link">Text +254712205979</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                © <span id="current-year"></span> All rights reserved.
+            </div>
+        </footer>
+    </div>
+
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script src="./main.js"></script>
+</body>
+</html>
